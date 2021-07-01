@@ -44,5 +44,9 @@ module Users
     has_many :ratings, as: :creator, dependent: :destroy
 
     validates :email, presence: true
+
+    def cinema_owner?
+      true
+    end
   end
 end

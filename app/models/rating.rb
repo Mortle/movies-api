@@ -12,10 +12,15 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  creator_id   :integer
+#  movie_id     :bigint
+#
+# Indexes
+#
+#  index_ratings_on_movie_id  (movie_id)
 #
 class Rating < ApplicationRecord
   belongs_to :movie
-  belongs_to :creator, polymorphic: true
+  belongs_to :creator, polymorphic: true, optional: true
 
   scope :system, -> { where(system: true) }
   scope :not_system, -> { where(system: false) }

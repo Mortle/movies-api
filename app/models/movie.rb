@@ -32,6 +32,8 @@ class Movie < ApplicationRecord
   has_many :ratings, dependent: :destroy
 
   def average_system_rating
+    return 0 if ratings.system.empty?
+
     ratings.system.sum { |rating| rating.value.to_i } / ratings.system.size
   end
 end

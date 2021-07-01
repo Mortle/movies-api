@@ -68,7 +68,7 @@ module Api
           params.require(:rating).permit(:source, :value)
         end
 
-        def set_show
+        def set_rating
           @rating = Rating.find(params[:id])
         end
 

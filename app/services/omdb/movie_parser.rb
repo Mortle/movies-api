@@ -30,7 +30,7 @@ module Omdb
         production: @movie_params['Production']
       )
 
-      parse_rating
+      @movie.update(ratings: parse_rating)
 
       @movie
     end
@@ -39,8 +39,8 @@ module Omdb
     private
 
       def parse_rating
-        @movie_params['Ratings'].each do |rating|
-          Rating.create(
+        @movie_params['Ratings'].map do |rating|
+          Rating.create!(
             source: rating['Source'],
             value: rating['Value'],
             movie: @movie,

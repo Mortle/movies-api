@@ -93,8 +93,10 @@ ActiveRecord::Schema.define(version: 2021_07_01_114741) do
     t.boolean "system"
     t.integer "creator_id"
     t.string "creator_type"
+    t.bigint "movie_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_ratings_on_movie_id"
   end
 
   create_table "shows", force: :cascade do |t|

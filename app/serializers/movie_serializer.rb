@@ -36,10 +36,10 @@ class MovieSerializer
              :production
 
   attribute :ratings do |movie|
-    RatingSerializer.new(movie.ratings.not_system).serializable_hash.to_json
+    RatingSerializer.new(movie.ratings.not_system)
   end
 
-  attribute :system_rating do
+  attribute :system_rating do |movie|
     {
       source: 'System rating',
       value: movie.average_system_rating

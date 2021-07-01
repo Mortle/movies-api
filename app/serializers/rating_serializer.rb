@@ -12,16 +12,21 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  creator_id   :integer
+#  movie_id     :bigint
+#
+# Indexes
+#
+#  index_ratings_on_movie_id  (movie_id)
 #
 class RatingSerializer
   include JSONAPI::Serializer
 
   attributes :value, :source
 
-  attribute :creator do
+  attribute :creator do |rating|
     {
-      creator_type: creator&.type,
-      creator_id: creator&.id
+      creator_type: rating&.creator&.type,
+      creator_id: rating&.creator&.id
     }
   end
 end

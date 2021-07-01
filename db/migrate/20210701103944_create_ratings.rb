@@ -6,6 +6,7 @@ class CreateRatings < ActiveRecord::Migration[6.1]
       t.boolean :system
       t.integer :creator_id
       t.string :creator_type
+      t.belongs_to :movie
 
       t.timestamps
     end

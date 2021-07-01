@@ -31,7 +31,7 @@
 #  index_moviegoers_on_uid_and_provider      (uid,provider) UNIQUE
 #
 module Users
-  class Moviegoers < ActiveRecord::Base
+  class Moviegoer < ActiveRecord::Base
     self.table_name = :moviegoers
 
     extend Devise::Models
@@ -44,5 +44,9 @@ module Users
     has_many :ratings, as: :creator, dependent: :destroy
 
     validates :email, presence: true
+
+    def cinema_owner?
+      false
+    end
   end
 end

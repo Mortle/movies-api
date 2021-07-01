@@ -1,0 +1,556 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/movies/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: imdb_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Movie or fetch from Omdb
+      tags:
+      - Movies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/movie_data"
+  "/api/v1/movies/{movie_id}/ratings":
+    parameters:
+    - name: movie_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: List ratings for movie
+      tags:
+      - Ratings
+      security:
+      - client: []
+        access-token: []
+        uid: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/rating_data"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '404':
+          description: Record not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+    post:
+      summary: create rating
+      tags:
+      - Ratings
+      security:
+      - client: []
+        access-token: []
+        uid: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/rating_data"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '404':
+          description: Record not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/rating"
+  "/api/v1/movies/{movie_id}/ratings/{id}":
+    parameters:
+    - name: movie_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show Rating
+      tags:
+      - Ratings
+      security:
+      - client: []
+        access-token: []
+        uid: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/rating_data"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '404':
+          description: Record not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+    patch:
+      summary: Update rating
+      tags:
+      - Ratings
+      security:
+      - client: []
+        access-token: []
+        uid: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/rating_data"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '404':
+          description: Record not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/rating"
+    delete:
+      summary: Delete rating
+      tags:
+      - Ratings
+      security:
+      - client: []
+        access-token: []
+        uid: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/success_message"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '404':
+          description: Record not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+  "/api/v1/movies/{movie_id}/shows":
+    parameters:
+    - name: movie_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: List shows for movie
+      tags:
+      - Shows
+      security:
+      - client: []
+        access-token: []
+        uid: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/show_data"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '404':
+          description: Record not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+    post:
+      summary: create show
+      tags:
+      - Shows
+      security:
+      - client: []
+        access-token: []
+        uid: []
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/show_data"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '404':
+          description: Record not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/show"
+  "/api/v1/movies/{movie_id}/shows/{id}":
+    parameters:
+    - name: movie_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show
+      tags:
+      - Shows
+      security:
+      - client: []
+        access-token: []
+        uid: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/show_data"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '404':
+          description: Record not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+    patch:
+      summary: Update show
+      tags:
+      - Shows
+      security:
+      - client: []
+        access-token: []
+        uid: []
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/show_data"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '404':
+          description: Record not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/show"
+    delete:
+      summary: Delete show
+      tags:
+      - Shows
+      security:
+      - client: []
+        access-token: []
+        uid: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/success_message"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '404':
+          description: Record not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/failure_message"
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000/
+components:
+  securitySchemes:
+    client:
+      type: apiKey
+      name: client
+      in: header
+    access-token:
+      type: apiKey
+      name: access-token
+      in: header
+    uid:
+      type: apiKey
+      name: uid
+      in: header
+  security:
+    client: []
+    access-token: []
+    uid: []
+  schemas:
+    success_message:
+      type: object
+      properties:
+        message:
+          type: string
+    failure_message:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+    show:
+      type: object
+      properties:
+        date_end:
+          type: string
+        date_start:
+          type: string
+        price:
+          type: integer
+    show_data:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            type:
+              type: string
+            attributes:
+              type: object
+              properties:
+                date_end:
+                  type: string
+                date_start:
+                  type: string
+                price:
+                  type: integer
+                movie:
+                  type: object
+                  properties:
+                    movie_id:
+                      type: integer
+                    title:
+                      type: string
+    rating:
+      type: object
+      properties:
+        source:
+          type: string
+        value:
+          type: string
+    rating_data:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            type:
+              type: string
+            attributes:
+              type: object
+              properties:
+                source:
+                  type: string
+                value:
+                  type: string
+                creator:
+                  type: object
+                  properties:
+                    creator_id:
+                      type: integer
+                    creator_type:
+                      type: string
+    movie_data:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            type:
+              type: string
+            attributes:
+              type: object
+              properties:
+                imdb_id:
+                  type: string
+                title:
+                  type: string
+                year:
+                  type: string
+                rated:
+                  type: string
+                released:
+                  type: string
+                runtime:
+                  type: string
+                genre:
+                  type: string
+                director:
+                  type: string
+                writer:
+                  type: string
+                actors:
+                  type: string
+                plot:
+                  type: string
+                language:
+                  type: string
+                country:
+                  type: string
+                poster:
+                  type: string
+                metascore:
+                  type: string
+                imdb_rating:
+                  type: string
+                imdb_votes:
+                  type: string
+                dvd:
+                  type: string
+                production:
+                  type: string
+                rating:
+                  ref: "#/components/schemas/rating_data"
+                system_rating:
+                  ref: "#/components/schemas/rating_data"
