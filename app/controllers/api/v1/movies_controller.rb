@@ -3,16 +3,25 @@
 module Api
   module V1
     class MoviesController < ApplicationController
+      before_action :find_persisted_movie, only: :show
+      before_action :find_omdb_movie, only: :show
+
       # GET /api/v1/movies/:id
       def show
-        movie = Omdb::FetchMovie.call(imdb_id: params[:id]).movie
+        return render status: :not_found unless @movie
 
-        if movie
-          render json: movie_result.movie, status: :ok
-        else
-          render status: :not_found
-        end
+        render json: @movie, status: :ok
       end
+
+      private
+
+        def find_persisted_movie
+          @movie = Movie.find_by(imdb_id: params[:id])
+        end
+
+        def find_omdb_movie
+          @movie ||= Omdb::FetchMovie.call(imdb_id: params[:id]).movie
+        end
     end
   end
 end
