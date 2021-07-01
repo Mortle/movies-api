@@ -11,8 +11,8 @@ module Api
         authorize Movie, :show?
 
         unless @movie
-          render json: formatted_errors('Record not found.'),
-                 status: :not_found and return
+          return render json: formatted_errors('Record not found.'),
+                        status: :not_found
         end
 
         render json: MovieSerializer.new(@movie).serializable_hash.to_json, status: :ok
