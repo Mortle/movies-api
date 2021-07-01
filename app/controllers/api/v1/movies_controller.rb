@@ -5,11 +5,9 @@ module Api
     class MoviesController < ApplicationController
       # GET /api/v1/movies/:id
       def show
-        movie_result = Omdb::FetchMovie.call(omdb_id: params[:id])
+        movie = Omdb::FetchMovie.call(imdb_id: params[:id]).movie
 
-        return render status: :not_found unless movie_result
-
-        if movie_result.movie
+        if movie
           render json: movie_result.movie, status: :ok
         else
           render status: :not_found

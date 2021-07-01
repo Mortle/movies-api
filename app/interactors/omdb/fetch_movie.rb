@@ -4,7 +4,7 @@ module Omdb
   class FetchMovie
     include Interactor
 
-    delegate :omdb_id, :movie, to: :context
+    delegate :imdb_id, :movie, to: :context
 
     def call
       fetch_omdb_movie
@@ -14,12 +14,12 @@ module Omdb
 
     private
 
-      def fetch_omdb_movie
-        resp = Omdb::Client.new(i: omdb_id).fetch_movies
+    def fetch_omdb_movie
+      resp = Omdb::Client.new(i: imdb_id).fetch_movies
 
-        context.fail!(error_message: resp['Error']) if resp.key?('Error')
+      context.fail!(error_message: resp['Error']) if resp.key?('Error')
 
-        context.movie = resp
-      end
+      context.movie = resp
+    end
   end
 end
