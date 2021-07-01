@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
 # ENV configuration
-gem "dotenv-rails", "~> 2.7.6"
+gem 'dotenv-rails', '~> 2.7.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4'
@@ -14,14 +16,14 @@ gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 
 # Serializing
-gem "jsonapi-serializer", "~> 2.2.0"
+gem 'jsonapi-serializer', '~> 2.2.0'
 
 # Auth
-gem "devise_token_auth", "~> 1.1.5"
-gem "pundit", "~> 2.1.0"
+gem 'devise_token_auth', '~> 1.1.5'
+gem 'pundit', '~> 2.1.0'
 
 # Encapsulation
-gem "interactor", "~> 3.0"
+gem 'interactor', '~> 3.0'
 
 # Third-party API requests
 gem 'httparty', '~> 0.17.3'
@@ -34,9 +36,9 @@ group :development, :test do
   gem 'pry'
 
   # Styling
-  gem "rubocop-rails", require: false
-  gem "rubocop-rspec", require: false
-  gem "rubocop-performance", require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :development do
@@ -46,4 +48,4 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
