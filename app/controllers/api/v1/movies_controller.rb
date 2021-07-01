@@ -8,6 +8,7 @@ module Api
 
       # GET /api/v1/movies/:id
       def show
+        # TODO: equal response for OMDb fetched movie and persisted movie
         return render status: :not_found unless @movie
 
         render json: @movie, status: :ok
