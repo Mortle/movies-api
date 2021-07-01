@@ -29,4 +29,4 @@ Run `rails s`
 
 ## Running api-docs
 1. Run rails server: `rails s`
-2. Go to http://localhost:3001/api-docs/
+2. Go to http://localhost:3000/api-docs/

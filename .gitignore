@@ -29,5 +29,3 @@
 .env.local
 
 # Ignore coverages
-/coverage
-!/coverage/.keep
