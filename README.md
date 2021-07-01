@@ -1,24 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements
+Ruby: 3.0.0
+PostgreSQL: 12+
 
-Things you may want to cover:
+##Ruby version
 
-* Ruby version
+```bash
+rbenv install 3.0.0
+# Verify expected ruby version is installed
+ruby --version
+```
 
-* System dependencies
+## Set up project
+1. Install and configure PostgreSQL database
+2. Install dependencies by running `bundle install`
+3. Run `rails db:setup && rails db:migrate` to initilize databases
+4. Add OMDB_API_KEY to .env.* files
 
-* Configuration
+## Running tests
+Run `bundle exec rspec`
 
-* Database creation
+## Running swagger
+Run `bundle exec rails rswag`
 
-* Database initialization
+## Runnning server
+Run `rails s`
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Running api-docs
+1. Run rails server: `rails s`
+2. Go to http://localhost:3000/api-docs/

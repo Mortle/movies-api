@@ -8,10 +8,14 @@ module Api
 
       # GET /api/v1/movies/:id
       def show
-        # TODO: equal response for OMDb fetched movie and persisted movie
-        return render status: :not_found unless @movie
+        authorize Movie, :show?
 
-        render json: @movie, status: :ok
+        unless @movie
+          return render json: formatted_errors('Record not found.'),
+                        status: :not_found
+        end
+
+        render json: MovieSerializer.new(@movie).serializable_hash.to_json, status: :ok
       end
 
       private

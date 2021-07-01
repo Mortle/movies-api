@@ -19,8 +19,11 @@ gem 'puma', '~> 5.0'
 gem 'jsonapi-serializer', '~> 2.2.0'
 
 # Auth
+gem 'devise', '~> 4.8.0'
 gem 'devise_token_auth', '~> 1.1.5'
 gem 'pundit', '~> 2.1.0'
+
+gem 'rack-cors', '~> 1.1.1'
 
 # Encapsulation
 gem 'interactor', '~> 3.0'
@@ -35,6 +38,10 @@ group :development, :test do
   # Debugging
   gem 'pry'
 
+  # Testing
+  gem 'rspec-rails', '~> 5.0.0'
+  gem 'rswag', '2.4.0'
+
   # Styling
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
@@ -42,9 +49,18 @@ group :development, :test do
 end
 
 group :development do
+  # Annotating schema
+  gem 'annotate', '~> 3.1.1'
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
+  gem 'database_cleaner', '~> 1.8.5'
+  gem 'factory_bot_rails', '~> 6.1.0'
+  gem 'shoulda-matchers', '~> 4.4.1'
+  gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

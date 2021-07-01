@@ -16,9 +16,15 @@
 #
 #  index_shows_on_movie_id  (movie_id)
 #
-class Show < ApplicationRecord
-  belongs_to :movie
+class ShowSerializer
+  include JSONAPI::Serializer
 
-  # TODO: return only active shows
-  scope :active, -> { where('date_start > ?', DateTime.now) }
+  attributes :date_end, :date_start, :price
+
+  attribute :movie do
+    {
+      id: movie.id,
+      title: movie.title
+    }
+  end
 end

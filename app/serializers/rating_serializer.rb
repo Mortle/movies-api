@@ -18,10 +18,15 @@
 #
 #  index_ratings_on_movie_id  (movie_id)
 #
-class Rating < ApplicationRecord
-  belongs_to :movie
-  belongs_to :creator, polymorphic: true, optional: true
+class RatingSerializer
+  include JSONAPI::Serializer
 
-  scope :system, -> { where(system: true) }
-  scope :omdb, -> { where(system: false) }
+  attributes :value, :source
+
+  attribute :creator do |rating|
+    {
+      creator_type: rating&.creator&.type,
+      creator_id: rating&.creator&.id
+    }
+  end
 end
