@@ -8,16 +8,15 @@ module Api
 
       # GET /api/v1/movies/:id
       def show
-        # TODO: equal response for OMDb fetched movie and persisted movie
-        return render status: :not_found unless @movie
+        authorize Movie, :show?
 
-        render json: @movie, status: :ok
+        render json: MovieSerializer.new(@movie).serializable_hash.to_json, status: :ok
       end
 
       private
 
         def find_persisted_movie
-          @movie = Movie.find_by(imdb_id: params[:id])
+          @movie = Movie.find_by!(imdb_id: params[:id])
         end
 
         def find_omdb_movie

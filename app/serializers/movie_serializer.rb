@@ -27,11 +27,22 @@
 #  updated_at  :datetime         not null
 #  imdb_id     :string
 #
-class Movie < ApplicationRecord
-  has_many :shows, dependent: :destroy
-  has_many :ratings, dependent: :destroy
+class MovieSerializer
+  include JSONAPI::Serializer
 
-  def average_system_rating
-    ratings.system.sum { |rating| rating.value.to_i } / ratings.system.size
+  attributes :imdb_id, :title, :year, :rated, :released, :runtime, :genre,
+             :director, :writer, :actors, :plot, :language, :country,
+             :poster, :metascore, :imdb_rating, :imdb_votes, :dvd,
+             :production
+
+  attribute :ratings do |movie|
+    RatingSerializer.new(movie.ratings.not_system).serializable_hash.to_json
+  end
+
+  attribute :system_rating do
+    {
+      source: 'System rating',
+      value: movie.average_system_rating
+    }
   end
 end

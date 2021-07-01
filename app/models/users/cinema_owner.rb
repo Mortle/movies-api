@@ -41,6 +41,8 @@ module Users
            :recoverable, :rememberable, :validatable
     include DeviseTokenAuth::Concerns::User
 
+    has_many :ratings, as: :creator, dependent: :destroy
+
     validates :email, presence: true
   end
 end

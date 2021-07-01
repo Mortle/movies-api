@@ -21,6 +21,7 @@ gem 'jsonapi-serializer', '~> 2.2.0'
 # Auth
 gem 'devise_token_auth', '~> 1.1.5'
 gem 'pundit', '~> 2.1.0'
+
 gem 'rack-cors', '~> 1.1.1'
 
 # Encapsulation
@@ -43,7 +44,7 @@ group :development, :test do
 end
 
 group :development do
-  # Add a comment summarizing the current schema to the top of models
+  # Annotating schema
   gem 'annotate', '~> 3.1.1'
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

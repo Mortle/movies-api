@@ -13,10 +13,15 @@
 #  updated_at   :datetime         not null
 #  creator_id   :integer
 #
-class Rating < ApplicationRecord
-  belongs_to :movie
-  belongs_to :creator, polymorphic: true
+class RatingSerializer
+  include JSONAPI::Serializer
 
-  scope :system, -> { where(system: true) }
-  scope :not_system, -> { where(system: false) }
+  attributes :value, :source
+
+  attribute :creator do
+    {
+      creator_type: creator&.type,
+      creator_id: creator&.id
+    }
+  end
 end

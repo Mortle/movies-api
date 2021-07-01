@@ -6,19 +6,14 @@ module Omdb
       @movie_params = movie_params
     end
 
-    # TODO: save rating
-    # {
-    #   "Source": "Metacritic",
-    #   "Value": "58/100"
-    # }
-
     # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def parsed_movie
-      Movie.create(
+      @movie = Movie.create(
         title: @movie_params['Title'],
         year: @movie_params['Year'].to_i,
         rated: @movie_params['Rated'],
         released: @movie_params['Released'],
+        runtime: @movie_params['Runtime'],
         genre: @movie_params['Genre'],
         director: @movie_params['Director'],
         writer: @movie_params['Writer'],
@@ -34,7 +29,24 @@ module Omdb
         dvd: @movie_params['DVD'],
         production: @movie_params['Production']
       )
+
+      parse_rating
+
+      @movie
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+
+    private
+
+      def parse_rating
+        @movie_params['Ratings'].each do |rating|
+          Rating.create(
+            source: rating['Source'],
+            value: rating['Value'],
+            movie: @movie,
+            system: false
+          )
+        end
+      end
   end
 end

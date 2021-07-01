@@ -6,7 +6,10 @@ Rails.application.routes.draw do
       mount_devise_token_auth_for 'Users::Moviegoers', at: 'moviegoers_auth'
       mount_devise_token_auth_for 'Users::CinemaOwner', at: 'cinema_owner_auth'
 
-      resources :movies, only: :show
+      resources :movies, only: :show do
+        resources :shows
+        resources :ratings
+      end
     end
   end
 end

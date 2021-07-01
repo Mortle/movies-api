@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_114741) do
     t.integer "year"
     t.string "rated"
     t.string "released"
+    t.string "runtime"
     t.string "genre"
     t.string "director"
     t.text "writer"
@@ -87,6 +88,11 @@ ActiveRecord::Schema.define(version: 2021_07_01_114741) do
   end
 
   create_table "ratings", force: :cascade do |t|
+    t.string "source"
+    t.string "value"
+    t.boolean "system"
+    t.integer "creator_id"
+    t.string "creator_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
