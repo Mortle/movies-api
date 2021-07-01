@@ -36,7 +36,7 @@ class MovieSerializer
              :production
 
   attribute :ratings do |movie|
-    RatingSerializer.new(movie.ratings.not_system)
+    RatingSerializer.new(movie.ratings.omdb)
   end
 
   attribute :system_rating do |movie|

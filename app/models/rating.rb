@@ -23,5 +23,5 @@ class Rating < ApplicationRecord
   belongs_to :creator, polymorphic: true, optional: true
 
   scope :system, -> { where(system: true) }
-  scope :not_system, -> { where(system: false) }
+  scope :omdb, -> { where(system: false) }
 end

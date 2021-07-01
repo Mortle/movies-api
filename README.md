@@ -16,6 +16,7 @@ ruby --version
 1. Install and configure PostgreSQL database
 2. Install dependencies by running `bundle install`
 3. Run `rails db:setup && rails db:migrate` to initilize databases
+4. Add OMDB_API_KEY to .env.* files
 
 ## Running tests
 Run `bundle exec rspec`
